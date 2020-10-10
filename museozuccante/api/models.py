@@ -1,14 +1,14 @@
 import os
 import uuid
 
-from api.validators import validate_md
+from .validators import validate_md
 from django.conf import settings
 from django.db import models
 
 
 def get_unique_filename(instance, filename):
     ext = filename.split('.')[-1].lower()
-    return os.path.join(settings.MARKDOWN_DIR, f'{uuid.uuid4()}.{ext}')
+    return os.path.join(settings.MARKDOWN_DIR, f'{instance.id}.{ext}')
 
 
 class Room(models.Model):

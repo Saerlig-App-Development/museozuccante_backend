@@ -26,7 +26,7 @@ class Item(models.Model):
     title = models.CharField(max_length=300)
     subtitle = models.CharField(max_length=300)
     poster = models.URLField(max_length=300)
-    body = models.FileField(upload_to=get_unique_filename, validators=[validate_md])
+    body = models.TextField()
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
 
     def __str__(self):

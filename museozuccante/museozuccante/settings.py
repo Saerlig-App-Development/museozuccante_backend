@@ -116,5 +116,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
-MEDIA_ROOT = os.path.join(str(BASE_DIR) + '/media/')
+STATIC_ROOT = os.path.join(os.path.dirname(os.path.dirname(str(BASE_DIR))), 'static')
+MEDIA_ROOT = os.path.join(os.path.dirname(os.path.dirname(str(BASE_DIR))), 'media')
+
 MARKDOWN_DIR = 'md/'

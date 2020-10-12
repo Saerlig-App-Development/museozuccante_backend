@@ -11,5 +11,8 @@ COPY . .
 RUN pip install --upgrade pip
 RUN pip install -r museozuccante/requirements.txt
 
+# TODO: Change in production
+ENV SECRETKEY=secrekeyplaceholder
+
 # define the default command to run when starting the container
 CMD ["gunicorn", "--chdir", "museozuccante", "--bind", "unix:/opt/services/djangoapp/socket/django.sock", "museozuccante.wsgi:application", "--workers", "2"]

@@ -2,26 +2,34 @@ version: '3'
 
 services:
   djangoapp:
-    build: .
+    build: ./museozuccante/
+    env_file:
+      - ./config/env/secrets.env
     volumes:
-      - .:/opt/services/djangoapp/src
-      - socket_volume:/opt/services/djangoapp/socket
+      - ./museozuccante:/opt/services/djangoapp/src/museozuccante
       - static_volume:/opt/services/djangoapp/static
       - media_volume:/opt/services/djangoapp/media
+    networks:
+      - nginx_network
 
   nginx:
-    image: nginx:1.19.1
+    image: library/nginx:1.19.4-alpine
     ports:
-      - 8080:80
+      - 80:80
     volumes:
       - ./config/nginx/conf.d:/etc/nginx/conf.d
-      - socket_volume:/opt/services/djangoapp/socket
       - static_volume:/opt/services/djangoapp/static
       - media_volume:/opt/services/djangoapp/media
+    networks:
+      - nginx_network
     depends_on:
       - djangoapp
+    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
 
 volumes:
-  socket_volume:
   static_volume:
   media_volume:
+
+networks:
+  nginx_network:
+    driver: bridge

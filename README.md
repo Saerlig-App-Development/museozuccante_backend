@@ -7,23 +7,21 @@
  
 ### Setup
 * Automatic:
+  * `docker-compose build`
   * `./setup.sh` (setup.bat)
 
-* Manual:
-  * `docker-compose build`
-  * `docker-compose run djangoapp museozuccante/manage.py makemigrations`
-  * `docker-compose run djangoapp museozuccante/manage.py migrate`
-  * `docker-compose run djangoapp museozuccante/manage.py collectstatic --no-input`
-  * `docker-compose run djangoapp museozuccante/manage.py createsuperuser`
 
 ### Run
  - `docker-compose up`
  
 ### Update
+
 * `docker-compose build`
 * if models were changed:
-  * `docker-compose run djangoapp museozuccante/manage.py makemigrations`
-  * `docker-compose run djangoapp museozuccante/manage.py migrate `
+  * `docker exec -it museozuccante_backend_djangoapp_1 ./manage.py makemigrations`
+  * `docker exec -it museozuccante_backend_djangoapp_1 ./manage.py migrate`
+* if static files were changed:
+  * `docker exec -it museozuccante_backend_djangoapp_1 ./manage.py collectstatic --no-input`
   
 ### By
 - [Leone Bacciu](https://github.com/LeoneBacciu)

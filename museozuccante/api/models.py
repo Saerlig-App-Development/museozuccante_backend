@@ -32,6 +32,7 @@ class Company(models.Model):
 class Item(models.Model):
     id = models.UUIDField(unique=True, primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=300)
+    author = models.CharField(max_length=300)
     subtitle = models.CharField(max_length=300)
     poster = models.URLField(max_length=300)
     highlighted = models.BooleanField()

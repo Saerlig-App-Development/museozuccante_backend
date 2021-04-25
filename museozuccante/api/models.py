@@ -15,6 +15,20 @@ class Room(models.Model):
         return self.title
 
 
+class Company(models.Model):
+    class Meta:
+        verbose_name_plural = 'Companies'
+
+    id = models.UUIDField(unique=True, primary_key=True, default=uuid.uuid4, editable=False)
+    title = models.CharField(max_length=300)
+    poster = models.URLField(max_length=300)
+    still_active = models.BooleanField()
+    body = models.TextField()
+
+    def __str__(self):
+        return self.title
+
+
 class Item(models.Model):
     id = models.UUIDField(unique=True, primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=300)
@@ -23,6 +37,7 @@ class Item(models.Model):
     highlighted = models.BooleanField()
     body = models.TextField()
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
+    company = models.ForeignKey(Company, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title + ' ' + self.subtitle

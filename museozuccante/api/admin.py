@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Room, Item
+from .models import Room, Item, Company
 
 
 @admin.register(Item)
@@ -16,4 +16,12 @@ class RoomAdmin(admin.ModelAdmin):
     readonly_fields = ('id',)
     ordering = ('title',)
     list_display = ('title', 'floor', 'id')
+    search_fields = ('title',)
+
+
+@admin.register(Company)
+class CompanyAdmin(admin.ModelAdmin):
+    readonly_fields = ('id',)
+    ordering = ('title',)
+    list_display = ('title', 'id')
     search_fields = ('title',)

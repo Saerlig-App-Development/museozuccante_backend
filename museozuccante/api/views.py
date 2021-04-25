@@ -2,7 +2,6 @@ from django.core.exceptions import ValidationError
 from django.core.handlers.wsgi import WSGIRequest
 from django.http import JsonResponse, HttpResponse
 
-from .models import Item, Room
 from .serializers import *
 
 
@@ -13,6 +12,11 @@ def http_error(status):
 def getRooms(request: WSGIRequest):
     data = Room.objects.all()
     return JsonResponse(serialize_rooms(data), safe=False)
+
+
+def getCompanies(request: WSGIRequest):
+    data = Company.objects.all()
+    return JsonResponse(serialize_companies(data), safe=False)
 
 
 def getItems(request: WSGIRequest):
@@ -27,6 +31,15 @@ def getRoom(request: WSGIRequest, pk):
     except ValidationError:
         return http_error(404)
     return JsonResponse(serialize_room(Room.objects.get(pk=pk)), safe=False)
+
+
+def getCompany(request: WSGIRequest, pk):
+    try:
+        if len(Company.objects.filter(pk=pk)) == 0:
+            raise ValidationError('Not found')
+    except ValidationError:
+        return http_error(404)
+    return JsonResponse(serialize_company(Company.objects.get(pk=pk)), safe=False)
 
 
 def getItem(request: WSGIRequest, pk):

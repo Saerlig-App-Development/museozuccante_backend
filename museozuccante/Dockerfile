@@ -3,6 +3,9 @@ FROM python:3.8-alpine
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
+RUN apk update \
+    && apk add jpeg-dev zlib-dev gcc python3-dev musl-dev
+
 RUN mkdir -p /opt/services/djangoapp/src/museozuccante
 WORKDIR /opt/services/djangoapp/src/museozuccante
 

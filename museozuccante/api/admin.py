@@ -1,5 +1,6 @@
 from django.contrib import admin
 
+from .forms import ItemModelForm, CompanyModelForm
 from .models import Room, Item, Company
 
 
@@ -9,6 +10,7 @@ class ItemAdmin(admin.ModelAdmin):
     list_display = ('title', 'subtitle', 'id')
     ordering = ('title',)
     search_fields = ('title', 'subtitle')
+    form = ItemModelForm
 
 
 @admin.register(Room)
@@ -25,3 +27,4 @@ class CompanyAdmin(admin.ModelAdmin):
     ordering = ('title',)
     list_display = ('title', 'id')
     search_fields = ('title',)
+    form = CompanyModelForm

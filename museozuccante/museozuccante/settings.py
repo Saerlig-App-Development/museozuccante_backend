@@ -22,8 +22,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRETKEY', 'lol')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('ENVIRONMENT') != 'prod'
-
+# DEBUG = os.getenv('ENVIRONMENT') != 'prod'
+DEBUG = True
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']  # TODO: add public ip
 
 # Application definition
